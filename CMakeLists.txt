@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.3)
-project(Ryan_Bond__Uno_Turn_Order__Programming_Assignment_1_)
+project(RyanBondUnoTurnOrderProgrammingAssignment1)
 
 set(CMAKE_CXX_STANDARD 20)
 
