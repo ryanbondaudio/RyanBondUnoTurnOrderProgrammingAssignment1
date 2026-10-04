@@ -16,19 +16,25 @@
 // destructor deletes both layers for anything nobody ever popped.
 
 template <typename T>
-class Stack {
+class Stack
+{
 public:
-    Stack() : head_(nullptr), size_(0) {}
+    Stack() : head_(nullptr), size_(0)
+    {
+    }
 
-    void push(T* value) {
+    void push(T* value)
+    {
         Node<T>* fresh = new Node<T>(value);
         fresh->next = head_;
         head_ = fresh;
         ++size_;
     }
 
-    T* pop() {
-        if (head_ == nullptr) {
+    T* pop()
+    {
+        if (head_ == nullptr)
+        {
             std::cout << "Stack is empty." << std::endl;
             return nullptr;
         }
@@ -40,30 +46,37 @@ public:
         return value;
     }
 
-    T* peek() const {
+    T* peek() const
+    {
         if (head_ == nullptr) return nullptr;
         return head_->data;
     }
 
-    bool isEmpty() const {
+    bool isEmpty() const
+    {
         return head_ == nullptr;
     }
 
-    int size() const {
+    int size() const
+    {
         return size_;
     }
 
-    void print() const {
+    void print() const
+    {
         Node<T>* current = head_;
-        while (current != nullptr) {
+        while (current != nullptr)
+        {
             std::cout << *current->data << ",";
             current = current->next;
         }
         std::cout << std::endl;
     }
 
-    ~Stack() {
-        while (head_ != nullptr) {
+    ~Stack()
+    {
+        while (head_ != nullptr)
+        {
             Node<T>* doomed = head_;
             head_ = head_->next;
             delete doomed->data;

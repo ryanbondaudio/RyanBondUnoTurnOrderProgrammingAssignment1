@@ -6,65 +6,96 @@
 #include "Node.h"
 
 template <typename T>
-class LinkedList: public List<T> {
+class LinkedList : public List<T>
+{
 public:
-    LinkedList() : head_ {nullptr} {}
-    
-    void addFront(T *value) override {
-        Node<T> *fresh {new Node<T>(value)};
+    LinkedList() : head_{nullptr}
+    {
+    }
+
+    void addFront(T* value) override
+    {
+        Node<T>* fresh {new Node<T>(value)};
         fresh->next = head_;
         head_ = fresh;
-        
     }
-    
+
     void deleteFront() override
     {
-        if (head_ == nullptr) {
-            std::cout << "LinkedList is empty" << std::endl; 
+        if (head_ == nullptr)
+        {
+            std::cout << "LinkedList is empty" << std::endl;
             return;
         }
-        Node<T> *doomed {head_};
+        
+        Node<T>* doomed{head_};
         head_ = head_->next;
+        
         delete doomed->data;
         delete doomed;
     }
     
-    bool search(T* value) const override {
+    void addAnywhere(int position, T* value) override
+    {
+        if (position == 0)
+        {
+            addFront(value);
+            return;
+        }
+        
+        Node<T>* fresh {new Node<T>(value)};
+        
+        Node<T>* current {head_};
+        
+        for (int i = 0; i < position - 1; i++)
+        {
+            current = current->next;
+        }
+        
+        fresh->next = current->next;
+        current->next = fresh;
+    }
+
+    bool search(T* value) const override
+    {
         Node<T>* current = head_;
-        while (current != nullptr) {
+        while (current != nullptr)
+        {
             if (*current->data == *value) return true;
             current = current->next;
         }
         return false;
     }
-
-
+    
     void print() const override
     {
         Node<T>* current = head_;
         while (current != nullptr)
         {
-            if (current->next == nullptr) {
-                std::cout << *current->data << "\n";
+            if (current->next == nullptr)
+            {
+                std::cout << *current->data;
             }
-            else {
+            else
+            {
                 std::cout << *current->data << ", ";
             }
             current = current->next;
         }
         std::cout << std::endl;
     }
-    
+
     ~LinkedList() override
     {
-        while (head_ != nullptr) {
+        while (head_ != nullptr)
+        {
             Node<T>* doomed = head_;
             head_ = head_->next;
             delete doomed->data;
             delete doomed;
         }
     }
-    
+
 private:
-    Node<T> * head_;
+    Node<T>* head_;
 };
