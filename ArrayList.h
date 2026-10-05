@@ -62,6 +62,20 @@ public:
         for (int i = position; i < size_ - 1; ++i) { data_[i] = data_[i + 1]; }
         --size_;
     }
+    
+    void reverse() override
+    {
+        if (size_ <= 1 || size_ > CAPACITY ) { std::cout << "List cannot be reversed.\n"; return; }
+        
+        for (int i = 0; i < size_ / 2; ++i)
+        {
+            int targetIndex = (size_ - 1) -  i;
+            
+            T* temp = data_[i];
+            data_[i] = data_[targetIndex];
+            data_[targetIndex] = temp;
+        }
+    }
 
     bool search(T* value) const override
     {

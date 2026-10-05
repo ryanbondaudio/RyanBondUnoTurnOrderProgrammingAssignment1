@@ -39,13 +39,13 @@ public:
     {
         if (position == 0) { addFront(value); return; }
         
-        if (position < 0) { std::cout << "Position cannot be negative \n"; return; }
+        if (position < 0) { std::cout << "Position cannot be negative. \n"; return; }
         
         Node<T>* current {head_};
 
         for (int i = 0; i < position - 1 && current != nullptr; i++) { current = current->next; }
         
-        if (current == nullptr) { std::cout<< "Position out of bounds \n"; return; }
+        if (current == nullptr) { std::cout<< "Position is out of bounds. \n"; return; }
         
         Node<T>* fresh {new Node<T>(value)};
         fresh->next = current->next;
@@ -56,9 +56,9 @@ public:
     
     void deleteAnywhere(int position) override
     {
-        if (head_ == nullptr) { std::cout << "LinkedList is empty \n"; return; }
+        if (head_ == nullptr) { std::cout << "LinkedList is empty. \n"; return; }
         
-        if (position < 0) { std::cout << "Position cannot be negative \n"; return; }
+        if (position < 0) { std::cout << "Position cannot be negative. \n"; return; }
         
         if (position == 0) { deleteFront(); return; }
         
@@ -66,7 +66,7 @@ public:
 
         for (int i = 0; i < position - 1 && current != nullptr; i++) { current = current->next; }
 
-        if (current == nullptr || current->next == nullptr) { std::cout << "Position out of bounds \n"; return; }
+        if (current == nullptr || current->next == nullptr) { std::cout << "Position out of bounds. \n"; return; }
         
         Node<T>* doomed{current->next};
         current->next = current->next->next;
@@ -75,6 +75,26 @@ public:
         delete doomed;
         
         --size_;
+    }
+    
+    void reverse() override
+    {
+        if (head_ == nullptr || size_ == 1) { std::cout << "List cannot be reversed. \n"; return; }
+        
+        
+        Node<T>* previous {nullptr};
+        Node<T>* current {head_};
+        Node<T>* next;
+        
+        for (int i = 0; i < size_ && current!= nullptr; i++)
+        {
+            next = current->next;
+            current->next = previous;
+            previous = current;
+            current = next;
+        }
+        
+        head_ = previous;
     }
 
     bool search(T* value) const override
