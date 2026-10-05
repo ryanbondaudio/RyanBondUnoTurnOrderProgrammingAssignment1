@@ -10,6 +10,7 @@ class LinkedList : public List<T>
 {
 public:
     LinkedList() : head_{nullptr}
+                 , size_{0} 
     {}
 
     void addFront(T* value) override
@@ -17,6 +18,8 @@ public:
         Node<T>* fresh {new Node<T>(value)};
         fresh->next = head_;
         head_ = fresh;
+        
+        ++size_;
     }
 
     void deleteFront() override
@@ -28,6 +31,8 @@ public:
         
         delete doomed->data;
         delete doomed;
+        
+        --size_;
     }
     
     void addAnywhere(int position, T* value) override
@@ -45,6 +50,8 @@ public:
         Node<T>* fresh {new Node<T>(value)};
         fresh->next = current->next;
         current->next = fresh;
+        
+        ++size_;
     }
     
     void deleteAnywhere(int position) override
@@ -66,6 +73,8 @@ public:
         
         delete doomed->data;
         delete doomed;
+        
+        --size_;
     }
 
     bool search(T* value) const override
@@ -105,4 +114,5 @@ public:
 
 private:
     Node<T>* head_;
+    int size_;
 };
