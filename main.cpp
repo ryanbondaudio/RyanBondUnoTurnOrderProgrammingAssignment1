@@ -12,10 +12,10 @@ int main()
     nums->addFront(new int(20));
     nums->addFront(new int(30));
     nums->print();
-    nums->addAnywhere(1, new int(99));
+    nums->addAnywhere(3, new int(99));
     nums->print();
-    // nums->deleteAnywhere(2);
-    // nums->print();
+    nums->deleteAnywhere(3);
+    nums->print();
     // nums->reverse();
     // nums->print();
     //

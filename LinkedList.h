@@ -10,8 +10,7 @@ class LinkedList : public List<T>
 {
 public:
     LinkedList() : head_{nullptr}
-    {
-    }
+    {}
 
     void addFront(T* value) override
     {
@@ -22,11 +21,7 @@ public:
 
     void deleteFront() override
     {
-        if (head_ == nullptr)
-        {
-            std::cout << "LinkedList is empty" << std::endl;
-            return;
-        }
+        if (head_ == nullptr) { std::cout << "LinkedList is empty.\n"; return; }
         
         Node<T>* doomed{head_};
         head_ = head_->next;
@@ -37,23 +32,40 @@ public:
     
     void addAnywhere(int position, T* value) override
     {
-        if (position == 0)
-        {
-            addFront(value);
-            return;
-        }
+        if (position == 0) { addFront(value); return; }
         
-        Node<T>* fresh {new Node<T>(value)};
+        if (position < 0) { std::cout << "Position cannot be negative \n"; return; }
         
         Node<T>* current {head_};
+
+        for (int i = 0; i < position - 1 && current != nullptr; i++) { current = current->next; }
         
-        for (int i = 0; i < position - 1; i++)
-        {
-            current = current->next;
-        }
+        if (current == nullptr) { std::cout<< "Position out of bounds \n"; return; }
         
+        Node<T>* fresh {new Node<T>(value)};
         fresh->next = current->next;
         current->next = fresh;
+    }
+    
+    void deleteAnywhere(int position) override
+    {
+        if (head_ == nullptr) { std::cout << "LinkedList is empty \n"; return; }
+        
+        if (position < 0) { std::cout << "Position cannot be negative \n"; return; }
+        
+        if (position == 0) { deleteFront(); return; }
+        
+        Node<T>* current {head_};
+
+        for (int i = 0; i < position - 1 && current != nullptr; i++) { current = current->next; }
+
+        if (current == nullptr || current->next == nullptr) { std::cout << "Position out of bounds \n"; return; }
+        
+        Node<T>* doomed{current->next};
+        current->next = current->next->next;
+        
+        delete doomed->data;
+        delete doomed;
     }
 
     bool search(T* value) const override
@@ -72,17 +84,12 @@ public:
         Node<T>* current = head_;
         while (current != nullptr)
         {
-            if (current->next == nullptr)
-            {
-                std::cout << *current->data;
-            }
-            else
-            {
-                std::cout << *current->data << ", ";
-            }
+            std::cout << *current->data << (current->next != nullptr ? ", " : "");
+            
             current = current->next;
         }
-        std::cout << std::endl;
+        
+        std::cout << '\n';
     }
 
     ~LinkedList() override

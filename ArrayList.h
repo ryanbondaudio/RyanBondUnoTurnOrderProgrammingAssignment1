@@ -11,67 +11,56 @@ class ArrayList : public List<T>
 {
 public:
     /** Constructor sets size to 0 by default.*/
-    ArrayList()
-        : size_{0}
-        , data_{}
-    {
-    }
+    ArrayList() : size_{0}
+                , data_{} 
+    {}
 
     void addFront(T* value) override
     {
-        if (size_ >= CAPACITY)
-        {
-            std::cout << "ArrayList is full." << std::endl;
-            return;
-        }
+        if (size_ >= CAPACITY) { std::cout << "ArrayList is full.\n";  return; }
 
-        for (int i = size_; i > 0; --i)
-        {
-            data_[i] = data_[i - 1];
-        }
-
+        for (int i = size_; i > 0; --i) { data_[i] = data_[i - 1]; } 
+        
         data_[0] = value;
         ++size_;
     }
 
     void deleteFront() override
     {
-        if (size_ == 0)
-        {
-            std::cout << "ArrayList is empty." << std::endl;
-            return;
-        }
+        if (size_ == 0) { std::cout << "ArrayList is empty.\n"; return; }
 
-        delete data_[0];
-
-        for (int i = 0; i < size_ - 1; ++i)
-        {
-            data_[i] = data_[i + 1];
-        }
+        for (int i = 0; i < size_ - 1; ++i) { data_[i] = data_[i + 1]; }
         --size_;
     }
 
     void addAnywhere(int position, T* value) override
     {
-        if (size_ >= CAPACITY)
-        {
-            std::cout << "ArrayList is full." << std::endl;
-            return;
-        }
+        if (size_ >= CAPACITY) { std::cout << "ArrayList is full.\n"; return; }
         
-        if (position == 0)
-        {
-            addFront(value);
-            return;
-        }
+        if (position > size_) { std::cout << "Position is out of bounds.\n"; return; }
         
-        for (int i = size_; i >= position; --i)
-        {
-            data_[i] = data_[i - 1];
-        }
+        if (position < 0) { std::cout << "Position cannot be negative.\n"; return; }
+        
+        if (position == 0) { addFront(value); return; }
+        
+        for (int i = size_; i > position; --i) { data_[i] = data_[i - 1]; }
         
         data_[position] = value;
         ++size_;
+    }
+    
+    void deleteAnywhere(int position) override
+    {
+        if (position >= size_) { std::cout << "Position is out of bounds.\n"; return; }
+        
+        if (size_ == 0) { std::cout << "ArrayList is empty.\n"; return; }
+
+        if (position < 0) { std::cout << "Position cannot be negative.\n"; return; }
+        
+        if (position == 0) { deleteFront(); return; }
+        
+        for (int i = position; i < size_ - 1; ++i) { data_[i] = data_[i + 1]; }
+        --size_;
     }
 
     bool search(T* value) const override
@@ -87,16 +76,9 @@ public:
     {
         for (int i = 0; i < size_; ++i)
         {
-            if (i != size_ - 1)
-            {
-                std::cout << *data_[i] << ",";
-            }
-            else
-            {
-                std::cout << *data_[i];
-            }
+            std::cout << *data_[i] << (i != size_ - 1? ", " : "");
         }
-        std::cout << std::endl;
+        std::cout << '\n';
     }
 
     ~ArrayList() override
