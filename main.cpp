@@ -8,16 +8,16 @@ int main()
     std::cout << "== List<int>: addAnywhere / deleteAnywhere / reverse =="
         << std::endl;
     std::unique_ptr<List<int>> nums = makeList<int>();
-    // nums->addFront(new int(10));
-    // nums->addFront(new int(20));
-    // nums->addFront(new int(30));
+    nums->addFront(new int(10));
+    nums->addFront(new int(20));
+    nums->addFront(new int(30));
     nums->print();
-    // nums->addAnywhere(3, new int(99));
-    // nums->print();
-    // nums->deleteAnywhere(3);
-    // nums->print();
-    // nums->reverse();
-    // nums->print();
+    nums->addAnywhere(1, new int(99));
+    nums->print();
+    nums->deleteAnywhere(2);
+    nums->print();
+    nums->reverse();
+    nums->print();
     
      std::cout << std::endl << "== List<int>: concat ==" << std::endl;
     std::unique_ptr<List<int>> more = makeList<int>();
