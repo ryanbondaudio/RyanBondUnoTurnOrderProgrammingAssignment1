@@ -96,6 +96,38 @@ public:
         
         head_ = previous;
     }
+    
+    void concat(List<T>* other) override
+    {
+        LinkedList<T>* otherCast {dynamic_cast<LinkedList<T>*>(other)}; 
+        
+        if (otherCast == nullptr) { std::cout << "Invalid list type, LinkedList cannot be concatenated.\n"; return; }
+        
+        Node<T>* current {head_};
+        Node<T>* otherCastCurrent {otherCast->head_};
+        
+        if (current == nullptr && size_ == 0)
+        {
+            head_ = otherCast->head_;
+            
+            size_ += otherCast->size_;
+        
+            otherCast->head_ = nullptr;
+            otherCast->size_ = 0;
+            return;
+        }
+
+        if (otherCastCurrent == nullptr && otherCast->size_ == 0) {std::cout << "Other list is empty.\n"; return; }
+        
+        for (int i = 0; i < size_ && current->next != nullptr; i++) { current = current->next; }
+        
+        current->next = otherCastCurrent;
+        
+        size_ += otherCast->size_;
+        
+        otherCast->head_ = nullptr;
+        otherCast->size_ = 0;
+    }
 
     bool search(T* value) const override
     {

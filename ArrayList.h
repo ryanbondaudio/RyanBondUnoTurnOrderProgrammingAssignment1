@@ -76,6 +76,25 @@ public:
             data_[targetIndex] = temp;
         }
     }
+    
+    void concat(List<T>* other) override
+    {
+        ArrayList<T>* otherCast {dynamic_cast<ArrayList<T>*>(other)};
+        
+        if (otherCast == nullptr) { std::cout << "Invalid list type, ArrayList cannot be concatenated.\n"; return; }
+        
+        if (size_ + otherCast-> size_ > CAPACITY || size_ > CAPACITY)
+        {
+            std::cout << "Size of concatenated list exceeds capacity, "
+                         "ArrayList cannot be concatenated.\n "; return; 
+        } 
+        
+        for (int i = 0; i < otherCast->size_; ++i) { data_[size_ + i] = otherCast->data_[i]; }
+        
+        size_ += otherCast->size_;
+        
+        otherCast->size_ = 0;
+    }
 
     bool search(T* value) const override
     {
