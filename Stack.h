@@ -20,8 +20,7 @@ class Stack
 {
 public:
     Stack() : head_(nullptr), size_(0)
-    {
-    }
+    {}
 
     void push(T* value)
     {

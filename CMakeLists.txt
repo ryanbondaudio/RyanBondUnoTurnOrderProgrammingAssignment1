@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(RyanBondUnoTurnOrderProgrammingAssignment1 main.cpp
         Stack.h
         ArrayList.h
-        List.h)
+        List.h
+        Card.h)
