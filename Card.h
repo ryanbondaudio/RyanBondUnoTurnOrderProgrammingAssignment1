@@ -11,7 +11,7 @@
 class Card
 {
 public:
-    Card(std::string& color, std::string& rank)
+    Card(const std::string& color, const std::string& rank)
         : color_(color)
         , rank_(rank)
     {}

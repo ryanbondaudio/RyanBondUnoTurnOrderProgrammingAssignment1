@@ -65,7 +65,9 @@ public:
     
     void reverse() override
     {
-        if (size_ <= 1 || size_ > CAPACITY ) { std::cout << "List cannot be reversed.\n"; return; }
+        if (size_ <= 1) { return; }
+        
+        if (size_ > CAPACITY ) { std::cout << "List cannot be reversed.\n"; return; }
         
         for (int i = 0; i < size_ / 2; ++i)
         {
@@ -111,7 +113,8 @@ public:
         {
             std::cout << *data_[i] << (i != size_ - 1? ", " : "");
         }
-        std::cout << '\n';
+        // Spacing purposes
+        std::cout << "\n\n";
     }
 
     ~ArrayList() override

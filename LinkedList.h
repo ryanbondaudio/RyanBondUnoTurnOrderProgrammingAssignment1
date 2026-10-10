@@ -79,7 +79,7 @@ public:
     
     void reverse() override
     {
-        if (head_ == nullptr || size_ == 1) { std::cout << "List cannot be reversed. \n"; return; }
+        if (head_ == nullptr || size_ <= 1) { return; }
         
         
         Node<T>* previous {nullptr};
@@ -149,8 +149,8 @@ public:
             
             current = current->next;
         }
-        
-        std::cout << '\n';
+        // Spacing purposes
+        std::cout << "\n\n";
     }
 
     ~LinkedList() override

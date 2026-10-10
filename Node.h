@@ -16,6 +16,5 @@ public:
     explicit Node(T* value)
         : data{value}
           , next{nullptr}
-    {
-    }
+    {}
 };

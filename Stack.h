@@ -66,10 +66,11 @@ public:
         Node<T>* current = head_;
         while (current != nullptr)
         {
-            std::cout << *current->data << ",";
+            std::cout << *current->data << (current->next != nullptr ? ", " : "");
             current = current->next;
         }
-        std::cout << std::endl;
+        // Spacing purposes
+        std::cout << "\n\n";
     }
 
     ~Stack()
