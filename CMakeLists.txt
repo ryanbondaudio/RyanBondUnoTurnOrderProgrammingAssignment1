@@ -7,4 +7,5 @@ add_executable(RyanBondUnoTurnOrderProgrammingAssignment1 main.cpp
         Stack.h
         ArrayList.h
         List.h
-        Card.h)
+        Card.h
+        main.cpp)

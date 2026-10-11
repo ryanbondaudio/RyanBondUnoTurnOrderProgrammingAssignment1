@@ -71,7 +71,7 @@ public:
         Node<T>* doomed{current->next};
         current->next = current->next->next;
         
-        delete doomed->data;
+        delete doomed->data;    
         delete doomed;
         
         --size_;

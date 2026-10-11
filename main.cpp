@@ -23,31 +23,31 @@ void playCard(const string& name, Stack<Card>& deck)
 int main()
 {
     // ---- Part 1: required test harness, do not modify ----
-    // std::cout << "== List<int>: addAnywhere / deleteAnywhere / reverse =="
-    //     << std::endl;
-    // std::unique_ptr<List<int>> nums = makeList<int>();
-    // nums->addFront(new int(10));
-    // nums->addFront(new int(20));
-    // nums->addFront(new int(30));
-    // nums->print();
-    // nums->addAnywhere(1, new int(99));
-    // nums->print();
-    // nums->deleteAnywhere(2);
-    // nums->print();
-    // nums->reverse();
-    // nums->print();
-    //
-    //  std::cout << std::endl << "== List<int>: concat ==" << std::endl;
-    // std::unique_ptr<List<int>> more = makeList<int>();
-    // more->addFront(new int(2));
-    // more->addFront(new int(1));
-    // more->print();
-    // nums->concat(more.get());
-    // nums->print();
-    // more->print();
+    std::cout << "== List<int>: addAnywhere / deleteAnywhere / reverse =="
+        << std::endl;
+    std::unique_ptr<List<int>> nums = makeList<int>();
+    nums->addFront(new int(10));
+    nums->addFront(new int(20));
+    nums->addFront(new int(30));
+    nums->print();
+    nums->addAnywhere(1, new int(99));
+    nums->print();
+    nums->deleteAnywhere(2);
+    nums->print();
+    nums->reverse();
+    nums->print();
+
+     std::cout << std::endl << "== List<int>: concat ==" << std::endl;
+    std::unique_ptr<List<int>> more = makeList<int>();
+    more->addFront(new int(2));
+    more->addFront(new int(1));
+    more->print();
+    nums->concat(more.get());
+    nums->print();
+    more->print();
     
     // ---- Part 2: your Uno scene goes below ----
-    
+
     // Create List of players
     unique_ptr<List<Player>> unoGame1 = makeList<Player>();
     
@@ -60,7 +60,7 @@ int main()
     mathewDeck.push(new Card("Red", "4"));
     mathewDeck.push(new Card("Blue", "Draw 2"));
     mathewDeck.push(new Card("Green", "8"));
-    mathewDeck.push(new Card("Red", "9"));
+    mathewDeck.push(new Card("Green", "9"));
     mathewDeck.push(new Card("Red", "5"));
     mathewDeck.push(new Card("Yellow", "7"));
     
@@ -73,8 +73,8 @@ int main()
     markDeck.push(new Card("Blue", "Reverse"));
     markDeck.push(new Card("Red", "3"));
     markDeck.push(new Card("Yellow", "3"));
-    markDeck.push(new Card("Blue", "9"));
-    markDeck.push(new Card("Green", "5"));
+    markDeck.push(new Card("Green", "1"));
+    markDeck.push(new Card("Green", "Reverse"));
     markDeck.push(new Card("Red", "7"));
     
     // Luke is the 3rd player
@@ -121,7 +121,8 @@ int main()
     johnDeck.push(new Card("Yellow", "2"));
     johnDeck.push(new Card("Yellow", "Skip"));
     johnDeck.push(new Card("Blue", "Skip"));
-    
+
+    cout << "Uno game new order:\n";
     unoGame1->print();
     
     playCard("Mathew", mathewDeck);
@@ -135,19 +136,22 @@ int main()
     unoGame1->reverse();
     unoGame1->print();
     
-    cout << "Luke's turn!\n";
+    cout << "Mathew's turn!\n";
+    playCard("Mathew", mathewDeck);
     playCard("Luke", lukeDeck);
-    
+
     cout << "--Skip John-- \n\n";
+
     playCard("Mark", markDeck);
     playCard("Mathew", mathewDeck);
+    playCard("Luke", lukeDeck);
     
     
     
-    
-    
-    cout << "Luke plays a wild draw 4 card, so John rage quits.\n";
+    cout << "--John rage quits--\n";
     unoGame1->deleteAnywhere(1);
+
+    cout << "New order: \n";
     unoGame1->print();
     
     cout << "Second Uno game wants to join:\n";
